@@ -6,16 +6,16 @@
 SCRIPTS_PATH="/jffs/scripts"
 CHECK_FILE="/tmp/scripts_started"
 
-readonly SCRIPT_NAME="$(basename "$0" .sh)"
-readonly SCRIPT_PATH="$(readlink -f "$0")"
-readonly SCRIPT_CONFIG="$(dirname "$0")/$SCRIPT_NAME.conf"
+SCRIPT_NAME="$(basename "$0" .sh)"
+SCRIPT_PATH="$(readlink -f "$0")"
+SCRIPT_CONFIG="$(dirname "$0")/$SCRIPT_NAME.conf"
 if [ -f "$SCRIPT_CONFIG" ]; then
     #shellcheck disable=SC1090
     . "$SCRIPT_CONFIG"
 fi
 
 scripts() {
-    readonly _ACTION="$1"
+    _ACTION="$1"
 
     for ENTRY in "$SCRIPTS_PATH"/*.sh; do
         [ "$(basename "$ENTRY" .sh)" = "$SCRIPT_NAME" ] && continue
